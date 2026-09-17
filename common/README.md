@@ -62,3 +62,10 @@ watching the topic in the web console.
 - Add `activemq-client` publish logic to `staffing-service` on its stage/state-change endpoint.
 - Add `activemq-client` subscriber logic to consumer service(s) above, replacing any
   direct synchronous calls to `staffing-service`.
+
+## Messaging setup
+HealthSafe uses ActiveMQ Classic at tcp://localhost:61616. 
+
+Start it with ```docker compose up -d``` in this directory, or run a native ActiveMQ installation on Windows. 
+The staffing service publishes JSON events to the staffing-events-topic; the ward service subscribes. 
+Equipment failures use the persistent equipment-failure-queue, where the equipment-alert service acknowledges messages only after recording them.
