@@ -7,9 +7,19 @@ package co.wethinkcode.healthsafe.mq;
  */
 public final class MqConfig {
 
-    public static final String BROKER_URL = "tcp://localhost:61616";
+    /** Broker connection URL; can be overridden with -Dhealthsafe.broker=. */
+    public static final String BROKER_URL = System.getProperty(
+            "healthsafe.broker", "tcp://localhost:61616"
+    );
+
+    /** Broadcast destination for staffing updates. */
+    public static final String TOPIC = "staffing-events-topic";
+
+    /** Guaranteed-delivery destination for equipment failures. */
     public static final String QUEUE = "equipment-failure-queue";
 
     private MqConfig() {
+        // Constants class: do not instantiate.
     }
+
 }
